@@ -1,0 +1,8 @@
+<section>
+  <header id='<%= project.id %>'>
+  <h2><a href="#/project/<%= project.id %>"><%= project.name %></a></h2>
+    <p class="project.description"><%= project.description %></p>
+    <p class='feature'>
+    </p>
+  </header>
+</section>

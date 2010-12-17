@@ -1,0 +1,19 @@
+{ "id": "p01",
+  "name": "Project 01",
+  "description": "Project Description 01",
+  "features": [
+    { "name": "Feature 01",
+      "stories": [
+        { "name": "Story 01", },
+        { "name": "Story 02", },
+        { "name": "Story 03", }
+      ]
+    },
+    { "name": "Feature 02",
+      "stories": [
+        { "name": "Story 04", },
+        { "name": "Story 05", }
+      ]
+    }
+  ]
+}
