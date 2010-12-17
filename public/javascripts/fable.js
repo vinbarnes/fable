@@ -10,7 +10,7 @@
     });
 
     this.get('#/projects', function(context) {
-      context.app.swap('');
+      context.render('templates/project_new.template').swap(context.$element());
       this.load('/data/projects.json')
       .then(function(projects) {
         $.each(projects, function(i, project) {
@@ -19,6 +19,13 @@
         });
       })
       .then(context.trigger('testalert', 1));
+    });
+
+    // GET new
+    this.get('#/projects/new', function(cx) {
+      context.app.swap('');
+      context.render('templates/project_form.template')
+        .swap(context.$element());
     });
 
     this.get('#/project/:id', function(context) {
