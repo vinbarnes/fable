@@ -6,14 +6,19 @@
     this.use('Template');
 
     this.get('#/', function(context) {
+      context.redirect('#/projects');
+    });
+
+    this.get('#/projects', function(context) {
       context.app.swap('');
-      this.load('/projects')
+      this.load('/data/projects.json')
       .then(function(projects) {
         $.each(projects, function(i, project) {
           context.render('templates/projects.template', {project: project})
             .appendTo(context.$element());
         });
-      });
+      })
+      .then(context.trigger('testalert', 1));
     });
 
     this.get('#/project/:id', function(context) {
@@ -28,6 +33,11 @@
           .appendTo('.feature');
         });
       });
+    });
+
+    this.bind('testalert', function(e, data) {
+      this.log(e);
+      this.log(data);
     });
   });
 
