@@ -1,6 +1,13 @@
 (function($) {
 
 
+  var Project = Model("project");
+  // TODO: Use persistence
+  Project.add(new Project({id: "01", name: "Project 01", description: "Project Description 01"}));
+  Project.add(new Project({id: "02", name: "Project 02", description: "Project Description 02"}));
+  Project.add(new Project({id: "03", name: "Project 03", description: "Project Description 03"}));
+
+
   var app = $.sammy('#main', function() {
 
     this.use('Template');
@@ -11,14 +18,12 @@
 
     this.get('#/projects', function(cx) {
       cx.render('templates/project_new.template').swap(cx.$element());
-      this.load('/data/projects.json')
-      .then(function(projects) {
-        $.each(projects, function(i, project) {
-          cx.render('templates/projects.template', {project: project})
-            .appendTo(cx.$element());
-        });
-      })
-      .then(cx.trigger('testalert', 1));
+
+      Project.each(function() {
+        console.log(this.attr("name"));
+        cx.render('templates/projects.template', {project: this.attributes})
+          .appendTo(cx.$element());
+      });
     });
 
     // GET new
