@@ -1,12 +1,18 @@
 (function($) {
 
-
-  var Project = Model("project");
-  // TODO: Use persistence
-  Project.add(new Project({id: "01", name: "Project 01", description: "Project Description 01"}));
-  Project.add(new Project({id: "02", name: "Project 02", description: "Project Description 02"}));
-  Project.add(new Project({id: "03", name: "Project 03", description: "Project Description 03"}));
-
+  var Project = Model("project", {
+    persistence: Model.localStorage()
+  });
+  Project.load();
+  console.log(Project.count());
+  if (Project.count() < 1) {
+    Project.add(new Project(
+      {id: 1, name: "Project 01", description: "Project Description 01"}));
+    Project.add(new Project(
+      {id: 2, name: "Project 02", description: "Project Description 02"}));
+    Project.add(new Project(
+      {id: 3, name: "Project 03", description: "Project Description 03"}));
+  }
 
   var app = $.sammy('#main', function() {
 
