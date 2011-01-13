@@ -5,11 +5,12 @@
 
     this.use('Template');
 
-
+    // Default route
     this.get('#/', function(cx) {
       cx.redirect('#/projects');
     });
 
+    // GET projects (index)
     this.get('#/projects', function(cx) {
 
       var projects = getProjects();
@@ -22,14 +23,7 @@
       });
     });
 
-    // GET new
-    this.get('#/projects/new', function(cx) {
-      cx.log('new');
-      cx.app.swap('');
-      cx.render('templates/project_form.template')
-        .swap(cx.$element());
-    });
-
+    // GET projects/:id (show)
     this.get('#/projects/:id', function(cx) {
       var projects = getProjects();
       var project = projects.find(this.params.id);
@@ -38,11 +32,23 @@
       .swap(cx.$element());
     });
 
+   // GET projects/new (new)
+    this.get('#/projects/new', function(cx) {
+      cx.log('new');
+      cx.app.swap('');
+      cx.render('templates/project_form.template')
+        .swap(cx.$element());
+    });
+
+    // Test bind
+    // Call with trigger
     this.bind('testalert', function(e, data) {
       this.log(e);
       this.log(data);
     });
 
+    // Load projects from local storage
+    // TODO: Modify to use REST storage
     function getProjects() {
 
       var Project = Model("project", {
