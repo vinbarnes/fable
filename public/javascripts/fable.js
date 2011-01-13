@@ -31,9 +31,10 @@
     });
 
     this.get('#/projects/:id', function(cx) {
-      var project = Project.find(this.params.id);
+      var projects = getProjects();
+      var project = projects.find(this.params.id);
       cx.log(project.attributes); 
-      cx.render('templates/projects.template', {project: project.attributes})
+      cx.render('templates/project.template', {project: project.attributes})
       .swap(cx.$element());
     });
 
