@@ -1,3 +1,14 @@
 <section id='new_project'>
   <a href='#/projects/new'>New Project</a>
+  <form action="#/projects" method="post">
+    <p>
+    <label for="project[name]">Name:</label>
+    <input type="text" name="project[name]" value="<%= project.name %>" />
+    </p>
+    <p>
+    <label for="project[description]">Description:</label>
+    <input type="text" name="project[name]" value="<%= project.description %>" />
+    </p>
+    <p><input type="submit" value="Submit" /></p>
+  </form>
 </section>
