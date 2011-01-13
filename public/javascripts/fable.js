@@ -18,7 +18,7 @@
       cx.app.swap('');
 
       projects.each(function() {
-        console.log(this.attr("name"));
+        console.log(this.attr("id"));
         cx.render('templates/projects.template', {project: this.attributes})
         .appendTo(cx.$element());
       });
@@ -28,10 +28,24 @@
     this.get('#/projects/new', function(cx) {
       console.log("\n\n\nnew");
       cx.app.swap('');
-      var Project = new Model("Project");
-      var project = new Project({name: "", description: ""});
+      var projects = getProjects();
+
+      var project = new projects({name: "", description: ""});
       cx.render('templates/project_new.template', {project: project.attributes})
       .swap(cx.$element());
+    });
+
+    this.post('#/projects', function(cx) {
+      var project = new Project(this.params.project)
+      project.save(function(success) {
+        if (success) {
+          context.redirect("#/projects/" + project.id());
+        } else {
+          // display errors...
+        }
+      });
+
+      cx.redirect('#/projects');
     });
 
     // GET projects/:id (show)
